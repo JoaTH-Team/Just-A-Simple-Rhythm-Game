@@ -1,14 +1,15 @@
 package backend.states;
 
+import flixel.FlxG;
 import flixel.FlxState;
 
 class BaseState extends FlxState
 {
+	var controls:Controls;
+
     override function create() {
         super.create();
-    }    
-
-    override function update(elapsed:Float) {
-        super.update(elapsed);
+		controls = new Controls();
+		FlxG.inputs.addInput(controls);
     }
 }
