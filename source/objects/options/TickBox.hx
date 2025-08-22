@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 class TickBox extends FlxSprite
 {
     public var sprTracker:FlxSprite;
+	public var checked:Bool = false;
     
     public function new() {
         super();
@@ -32,10 +33,12 @@ class TickBox extends FlxSprite
         if (animation.name == "unCheck")
         {
             animation.play("check");
+			checked = true;
         }
         else
         {
             animation.play("unCheck");
+			checked = false;
         }
     }
 }

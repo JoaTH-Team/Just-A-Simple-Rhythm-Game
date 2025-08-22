@@ -1,5 +1,6 @@
-package backend.states;
+package states.options;
 
+import backend.GameUtil;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -32,6 +33,8 @@ class OptionsSubState extends BaseSubState
         optionsGroup = new FlxTypedGroup<FlxText>();
         add(optionsGroup);
 
+        addTick("Uncapped FPS");
+
         for (i in 0...options.length)
         {
             var optionText:FlxText = new FlxText(20, 60 + (i * 60), 0, options[i], 20);
@@ -40,6 +43,7 @@ class OptionsSubState extends BaseSubState
 
             var icon:TickBox = new TickBox();
 			icon.sprTracker = optionText;
+			icon.checked = SaveManager.getData(options[i]);
 			tickBoxs.push(icon);
 			add(icon);
         }
@@ -68,6 +72,8 @@ class OptionsSubState extends BaseSubState
             if (selectedOption < tickBoxs.length)
             {
                 tickBoxs[selectedOption].toggle();
+				var optionName:String = options[selectedOption];
+				SaveManager.setData(optionName, !SaveManager.getData(optionName));
             }
         }
     }
@@ -90,13 +96,11 @@ class OptionsSubState extends BaseSubState
 		}
     }
 
-    // == OPTIONS ONLY NEED PART ==
-
     /**
      * Add a bool check options
      */
-    function addTick(name:String, data:Dynamic):Void {
+    function addTick(name:String):Void {
         options.push(name);
-        optionsData.push(data);
+		tickBoxs[tickBoxs.length - 1].checked = SaveManager.getData(name);
     }
 }

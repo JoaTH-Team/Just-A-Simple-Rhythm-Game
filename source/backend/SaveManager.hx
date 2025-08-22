@@ -13,29 +13,36 @@ class SaveManager
 
         try {
             if (save.data.options == null) {
-                save.data.options = new Array<String>();
-                save.data.options[0] = "";
+				save.data.options = new Map<String, Dynamic>();
             }
+			initSave();
         } catch (e:Exception) {
             trace(e.details());
         }
     }
 
-    public static function setData(key:String, value:Dynamic):Void {
+	public static function setData(key:String, value:Dynamic):Void
+	{
         if (save.data == null) {
             initData();
         }
-        if (value == false) {
-            save.data.options.remove(value);
-        } else if (value == true) {
-            if (!save.data.options.contains(key)) {
-                save.data.options.push(key);
-            }
+		trace("Setting option: " + key + " to " + value);
+
+		save.data.options.set(key, value);
+		save.flush();
+	}
+	public static function getData(key:String):Dynamic
+	{
+		if (save.data == null)
+		{
+			initData();
         }
-        save.flush();
+		trace("Getting option: " + key);
+
+		return save.data.options.get(key);
     }
 
     public static function initSave() {
-        save.data.options.push("Uncapped FPS");
+		save.data.options.set("Uncapped FPS", true);
     }
 }

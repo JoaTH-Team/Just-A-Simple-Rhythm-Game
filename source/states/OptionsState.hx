@@ -9,7 +9,7 @@ import flixel.text.FlxText;
 
 class OptionsState extends BaseState
 {
-    var options:Array<String> = ["Controls", "Gameplay"];
+	var options:Array<String> = ["Controls", "Preferences"];
     var selectedOption:Int = 0;
     var optionsGroup:FlxTypedGroup<FlxText>;
     var camFollow:FlxObject;
@@ -54,8 +54,8 @@ class OptionsState extends BaseState
         {
             switch (options[selectedOption])
             {
-                case "Gameplay":
-                    openSubState(new states.options.GameplaySubState());
+				case "Preferences":
+					openSubState(new states.options.OptionsSubState());
             }
         }
     }
