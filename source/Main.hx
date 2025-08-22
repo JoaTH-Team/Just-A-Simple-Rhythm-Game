@@ -14,7 +14,7 @@ class Main extends Sprite
 		FlxModding.init();
 
 		// added FlxGame
-		addChild(new FlxGame(0, 0, states.InitState, 999, 999, false, false));
+		addChild(new FlxGame(0, 0, states.InitState, 144, 144, false, false));
 
 		// added FPS
 		addChild(new FPS(10, 10, 0xFFFFFF));
