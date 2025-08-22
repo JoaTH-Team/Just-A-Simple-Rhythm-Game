@@ -1,8 +1,8 @@
 package states;
 
+import backend.SaveManager;
 import flixel.FlxG;
 import flixel.util.FlxTimer;
-import haxe.ui.Toolkit;
 
 class InitState extends BaseState
 {
@@ -10,7 +10,8 @@ class InitState extends BaseState
         super.create();
 
         // Init Haxe UI Toolkit
-        Toolkit.init();
+		SaveManager.initData();
+
         new FlxTimer().start(0.25, function(t) {
             FlxG.switchState(() -> new SelectSongState());
         });

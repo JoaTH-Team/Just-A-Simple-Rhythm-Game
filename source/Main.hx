@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxGame;
 import flixel.system.FlxModding;
-import haxe.ui.HaxeUIApp;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 

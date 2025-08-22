@@ -4,16 +4,19 @@ import flixel.addons.input.FlxControls;
 import flixel.input.keyboard.FlxKey;
 
 enum Action {
+	// UI Actions
 	UI_LEFT;
 	UI_DOWN;
 	UI_RIGHT;
 	UI_UP;
 
+	// Game Actions
 	GAME_LEFT;
 	GAME_DOWN;
 	GAME_RIGHT;
 	GAME_UP;
 
+	// Global Actions
 	ACCEPT;
 	BACK;
 }

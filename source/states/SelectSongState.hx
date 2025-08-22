@@ -1,15 +1,17 @@
 package states;
 
+import backend.GameUtil;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.system.FlxModding;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 
 class SelectSongState extends BaseState
 {
-    var songList:Array<String> = ["so cool", "so cool 2", "so cool 3"];
+	var songList:Array<String> = [];
     var songGroup:FlxTypedGroup<FlxText>;
     var songSelected:Int = 0;
 	var camFollow:FlxObject;
@@ -18,8 +20,10 @@ class SelectSongState extends BaseState
     {
         super.create();
 
-		camFollow = new FlxObject(0, 0, 100, 100);
-		camFollow.scrollFactor.set(0, 0);
+		songList = GameUtil.getSongName();
+
+		camFollow = new FlxObject(80, 0, 0, 0);
+		camFollow.screenCenter(X);
 		add(camFollow);
 
         FlxModding.reload();
@@ -29,23 +33,48 @@ class SelectSongState extends BaseState
 
         for (i in 0...songList.length)
         {
-			var songText:FlxText = new FlxText(10, 10 + i * 20, 0, songList[i], 24);
+			var songText:FlxText = new FlxText(20, 60 + (i * 60), 0, songList[i], 20);
             songText.ID = i;
             songGroup.add(songText);
         }
+		changeSelection();
 		FlxG.camera.follow(camFollow);
     }
 
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
+		FlxG.camera.followLerp = GameUtil.doLerp(FlxG.camera.followLerp, 0.1, 0.5);
+
+		if (controls.justPressed.UI_UP || controls.justPressed.UI_DOWN)
+		{
+			changeSelection(controls.justPressed.UI_UP ? -1 : 1);
+		}
+
+		if (controls.justPressed.ACCEPT) {}
+
+		if (FlxG.keys.justPressed.Q)
+		{
+			FlxG.switchState(() -> new OptionsState());
+		}
     }    
 
     function changeSelection(change:Int = 0) {
-        songSelected = FlxMath.wrap(songSelected + change, 0, songList.length - 1);
-		for (text in songGroup)
+		try
 		{
-			camFollow.y = camFollow.y + 20 * (text.ID - songSelected);
+			songSelected = FlxMath.wrap(songSelected + change, 0, songList.length - 1);
+			for (text in songGroup)
+			{
+				text.alpha = text.ID == songSelected ? 1 : 0.5;
+				if (text.ID == songSelected)
+				{
+					camFollow.y = text.y;
+				}
+			}
+		}
+		catch (e:haxe.Exception)
+		{
+			trace(e.details());
 		}
     }
 }

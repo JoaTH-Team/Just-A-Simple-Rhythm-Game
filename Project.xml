@@ -39,8 +39,6 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-modding" />
 	<haxelib name="flixel-controls" />
-	<haxelib name="haxeui-core" />
-	<haxelib name="haxeui-flixel" />
 	<haxelib name="flxrhythmconductor" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
