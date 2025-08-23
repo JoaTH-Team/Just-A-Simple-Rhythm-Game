@@ -3,6 +3,8 @@ package states;
 import backend.GameUtil;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.addons.display.FlxBackdrop;
+import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.system.FlxModding;
@@ -19,6 +21,10 @@ class SelectSongState extends BaseState
     override public function create()
     {
         super.create();
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33C4C4C4, 0x0));
+		grid.velocity.set(40, 40);
+		add(grid);
 
 		songList = GameUtil.getSongName();
 

@@ -1,6 +1,7 @@
 package backend.states;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 
 class BaseState extends FlxState

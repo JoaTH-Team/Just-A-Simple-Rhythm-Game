@@ -25,8 +25,7 @@ class SaveManager
 	{
         if (save.data == null) {
             initData();
-        }
-		trace("Setting option: " + key + " to " + value);
+		}
 
 		save.data.options.set(key, value);
 		save.flush();
@@ -36,13 +35,15 @@ class SaveManager
 		if (save.data == null)
 		{
 			initData();
-        }
-		trace("Getting option: " + key);
+		}
 
 		return save.data.options.get(key);
     }
 
     public static function initSave() {
-		save.data.options.set("Uncapped FPS", true);
+		save.data.options.set("Auto-Play", false);
+		save.data.options.set("Anti-Aliasing", true);
+		save.data.options.set("Show HUD", true);
+		save.data.options.set("Overlay BG", true);
     }
 }

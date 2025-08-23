@@ -2,7 +2,7 @@ package;
 
 import flixel.FlxGame;
 import flixel.system.FlxModding;
-import openfl.display.FPS;
+import objects.counter.Counter;
 import openfl.display.Sprite;
 
 class Main extends Sprite
@@ -17,6 +17,6 @@ class Main extends Sprite
 		addChild(new FlxGame(0, 0, states.InitState, 144, 144, false, false));
 
 		// added FPS
-		addChild(new FPS(10, 10, 0xFFFFFF));
+		addChild(new Counter(10, 10, 0xFFFFFF));
 	}
 }
