@@ -17,9 +17,12 @@ class GameUtil {
     public static function getSongName():Array<String> {
         var songs:Array<String> = [];
         #if sys
-        if (sys.FileSystem.exists('assets/data/songs')) {
-            for (folder in sys.FileSystem.readDirectory('assets/data/songs')) {
-                if (sys.FileSystem.isDirectory('assets/data/songs/' + folder)) {
+		if (sys.FileSystem.exists(Paths.getPath("data/songs")))
+		{
+			for (folder in sys.FileSystem.readDirectory(Paths.getPath("data/songs")))
+			{
+				if (sys.FileSystem.isDirectory(Paths.getPath("data/songs/") + folder))
+				{
                     songs.push(folder);
                 }
             }
