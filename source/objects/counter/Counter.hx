@@ -1,5 +1,6 @@
 package objects.counter;
 
+import flixel.FlxG;
 import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
@@ -40,7 +41,7 @@ class Counter extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 12, color);
+		defaultTextFormat = new TextFormat(Paths.getFont("vcr.ttf"), 12, color);
 		text = "FPS: ";
 
 		cacheCount = 0;
@@ -54,6 +55,8 @@ class Counter extends TextField
 			__enterFrame(time - currentTime);
 		});
 		#end
+		width = FlxG.width;
+		height = FlxG.height;
 	}
 
 	// Event Handlers
@@ -74,7 +77,7 @@ class Counter extends TextField
 		if (currentCount != cacheCount /*&& visible*/)
 		{
 			text = "FPS: " + currentFPS;
-            text += "\nMS: " + Math.round(deltaTime * 10) / 10;
+			text += " - MS: " + Math.round(deltaTime * 10) / 10;
             text += "\nMEM: " + Math.round(System.totalMemory / 1024 / 1024 * 10) / 10 + "MB";
 
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))

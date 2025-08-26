@@ -7,9 +7,7 @@ import flixel.util.FlxTimer;
 class InitState extends BaseState
 {
     override function create() {
-        super.create();
-
-        // Init Haxe UI Toolkit
+		super.create();
 		SaveManager.initData();
 
         new FlxTimer().start(0.25, function(t) {

@@ -12,6 +12,7 @@ class Main extends Sprite
 		super();
 
 		FlxModding.init();
+		FlxModding.enabled = true;
 
 		// added FlxGame
 		addChild(new FlxGame(0, 0, states.InitState, 144, 144, false, false));

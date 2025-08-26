@@ -20,4 +20,8 @@ class Paths {
     inline public static function getImages(name:String):String {
         return getPath("images/" + name + ".png");
     }
+	inline public static function getFont(name:String):String
+	{
+		return getPath("fonts/" + name);
+	}
 }

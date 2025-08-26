@@ -26,13 +26,12 @@ class SelectSongState extends BaseState
 		grid.velocity.set(40, 40);
 		add(grid);
 
-		songList = GameUtil.getSongName();
-
 		camFollow = new FlxObject(80, 0, 0, 0);
 		camFollow.screenCenter(X);
 		add(camFollow);
 
         FlxModding.reload();
+		songList = GameUtil.getSongName();
 
         songGroup = new FlxTypedGroup<FlxText>();
         add(songGroup);
@@ -62,6 +61,10 @@ class SelectSongState extends BaseState
 		if (FlxG.keys.justPressed.Q)
 		{
 			FlxG.switchState(() -> new OptionsState());
+		}
+		if (FlxG.keys.justPressed.M)
+		{
+			FlxG.switchState(() -> new ModConfigState());
 		}
     }    
 
