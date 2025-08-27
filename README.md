@@ -1,2 +1,2 @@
-# Just A Simple Rhythm Game
-A rhythm game, hope is can be as fast as possible, lightweight :>>>
+# `Not Taiko` - A Rhythm game
+`Not Taiko` is a rhythm **1 NOTE** game

@@ -16,7 +16,7 @@ class OptionsState extends BaseState
 	var mainOptions:Array<String> = ["Controls", "Preferences"];
 	var prefOptions:Array<String> = ["Auto-Play", "Anti-Aliasing", "Show HUD", "Overlay BG"];
 	var controlsOptions:Array<String> = ["Gameplay", "Menu"];
-	var controlsGameplay:Array<String> = ["Move Up", "Move Down", "Move Left", "Move Right"];
+	var controlsGameplay:Array<String> = ["Game Tap"];
 	var controlsMenu:Array<String> = ["UI Up", "UI Down", "UI Left", "UI Right", "Accept", "Back"];
 
 	var currentOptions:Array<String>;
@@ -73,7 +73,7 @@ class OptionsState extends BaseState
 
         if (controls.justPressed.BACK)
         {
-			if (inPreferences)
+			if (inPreferences || inControls)
 			{
 				inPreferences = false;
 				currentOptions = mainOptions;

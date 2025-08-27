@@ -13,10 +13,7 @@ enum Action {
 	UI_UP;
 
 	// Game Actions
-	GAME_LEFT;
-	GAME_DOWN;
-	GAME_RIGHT;
-	GAME_UP;
+	GAME_TAP;
 
 	// Global Actions
 	ACCEPT;
@@ -32,10 +29,7 @@ class Controls extends FlxControls<Action>
 			Action.UI_DOWN => [FlxKey.DOWN],
 			Action.UI_RIGHT => [FlxKey.RIGHT],
 			Action.UI_UP => [FlxKey.UP],
-			Action.GAME_LEFT => [FlxKey.LEFT],
-			Action.GAME_DOWN => [FlxKey.DOWN],
-			Action.GAME_RIGHT => [FlxKey.RIGHT],
-			Action.GAME_UP => [FlxKey.UP],
+			Action.GAME_TAP => [FlxKey.SPACE],
 			Action.ACCEPT => [FlxKey.ENTER],
 			Action.BACK => [FlxKey.ESCAPE]
 		];

@@ -30,10 +30,10 @@ class SelectSongState extends BaseState
 		camFollow.screenCenter(X);
 		add(camFollow);
 
-        FlxModding.reload();
-		songList = GameUtil.getSongName();
+		FlxModding.reload();
+		songList = GameUtil.coolTextFile("assets/data/songList.txt");
 
-        songGroup = new FlxTypedGroup<FlxText>();
+		songGroup = new FlxTypedGroup<FlxText>();
         add(songGroup);
 
         for (i in 0...songList.length)
@@ -56,7 +56,11 @@ class SelectSongState extends BaseState
 			changeSelection(controls.justPressed.UI_UP ? -1 : 1);
 		}
 
-		if (controls.justPressed.ACCEPT) {}
+		if (controls.justPressed.ACCEPT)
+		{
+			PlayState.song = songList[songSelected];
+			FlxG.switchState(() -> new PlayState());
+		}
 
 		if (FlxG.keys.justPressed.Q)
 		{

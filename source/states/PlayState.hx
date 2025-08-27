@@ -1,47 +1,53 @@
 package states;
 
-import flixel.FlxCamera;
+import backend.GameUtil;
 import flixel.FlxG;
 import flixel.addons.sound.FlxRhythmConductor;
 import flixel.addons.sound.FlxRhythmConductorUtil;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.util.FlxColor;
 import objects.gameplay.Note;
+
+using flixel.addons.sound.FlxRhythmConductorUtil;
 
 class PlayState extends BaseState
 {
 	public static var song:String = "default";
-
-	public var noteGroup:FlxTypedGroup<Note>;
-	public var camHUD:FlxCamera;
+	public var note:Note;
+	public var notes:FlxTypedGroup<Note>;
 
 	override public function create()
 	{
 		super.create();
 
-		// Reset the conductor
+		if (FlxG.sound.music != null)
+			FlxG.sound.music.stop();
+
+		persistentUpdate = persistentDraw = true;
+
+		FlxG.camera.zoom = 1;
+
+		notes = new FlxTypedGroup<Note>();
+		add(notes);
+
+		note = new Note(0, 0);
+		note.screenCenter(Y);
+		note.x += 100;
+		add(note);
+
 		FlxRhythmConductor.reset();
-
-		// Some HUD Setup
-		camHUD = new FlxCamera();
-		camHUD.bgColor = FlxColor.TRANSPARENT;
-		FlxG.cameras.add(camHUD, false);
-
-		noteGroup = new FlxTypedGroup<Note>();
-		add(noteGroup);
-
-		for (i in 0...4)
+		FlxG.sound.playMusic(Paths.getMusic('songs/$song/song'), 1, false);
+		FlxRhythmConductor.instance.onBeatHit.add((beat:Int, backward:Bool) ->
 		{
-			var note = new Note((FlxG.width / 2) - (180) + (i * 60), FlxG.height / 2);
-			noteGroup.add(note);
-		}
-
-		FlxG.sound.playMusic(Paths.getMusic('songs/$song'), 1, false);
-		FlxRhythmConductorUtil.loadMetaFromFilePath(FlxRhythmConductor.instance, Paths.getData('songs/$song-meta.json'));
+			FlxG.camera.zoom += 0.015;
+		});
+		FlxRhythmConductor.instance.loadMetaFromFilePath(Paths.getMusic('songs/$song/song'));
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		FlxG.camera.zoom = GameUtil.doLerp(1, FlxG.camera.zoom, 0.95);
+
+		FlxRhythmConductor.instance.update(null);
 	}
 }
